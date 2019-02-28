@@ -13,7 +13,7 @@
 #include	"lwip_app.h"
 #include "main.h"
 #include "GUI_VNC.h"
-
+#include "app_ui.h"
 BaseType_t xReturnedLed;
 TaskHandle_t xHandleLed = NULL;
 void vTaskCodeLed( void * pvParameters )
@@ -21,7 +21,7 @@ void vTaskCodeLed( void * pvParameters )
 	for( ;; )
 	{  
 		vTaskDelay(1000);
-		RGB_RED_LED_TOGGLE;
+	//	RGB_RED_LED_TOGGLE;
 		Sys.dhcpSta=CheckDHCPsta();
 	}
 }
@@ -36,12 +36,12 @@ void vTaskCodeShell( void * pvParameters )
 		SHELL_Main(&t_shell);
 	}
 }
-
+extern GUI_CONST_STORAGE GUI_BITMAP bm1;
+extern GUI_CONST_STORAGE GUI_BITMAP bm2;
 BaseType_t xReturnedUi;
 TaskHandle_t xHandleUi = NULL;
 void vTaskCodeUi(void * pvParameters)
 {
-	uint16_t i=0;
 	while(Sys.dhcpSta==0)
 	{
 		osDelay(200);
@@ -54,13 +54,9 @@ void vTaskCodeUi(void * pvParameters)
 	GUI_VNC_SetSize(V_LCD_W,V_LCD_H);
 	GUI_VNC_RingBell();
 	
-	GUI_SetBkColor(GUI_BLUE);
-	GUI_SetColor(GUI_RED);
-	GUI_Clear();
+	UI_app();
   for(;;)
   {
-		GUI_Delay(1000);	
-		GUI_DispHexAt(i++,V_LCD_W/2,V_LCD_H/2,4);
   }
 }
 

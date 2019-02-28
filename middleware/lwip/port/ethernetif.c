@@ -1136,6 +1136,7 @@ err_t ethernetif0_init(struct netif *netif)
 //		ethernetif_0.TxBuffDescrip = staticMalloc(SDK_SIZEALIGN(ENET_TXBD_NUM*sizeof(enet_tx_bd_struct_t),FSL_ENET_BUFF_ALIGNMENT));
 //		ethernetif_0.RxDataBuff = staticMalloc(SDK_SIZEALIGN(ENET_RXBUFF_SIZE, FSL_ENET_BUFF_ALIGNMENT)*ENET_RXBD_NUM);
 //		ethernetif_0.TxDataBuff = staticMalloc(SDK_SIZEALIGN(ENET_TXBUFF_SIZE, FSL_ENET_BUFF_ALIGNMENT)*ENET_TXBD_NUM);
+	
     return ethernetif_init(netif, &ethernetif_0, 0U, (ethernetif_config_t *)netif->state);
 }
 

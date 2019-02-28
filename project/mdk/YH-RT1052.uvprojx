@@ -415,6 +415,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -455,6 +460,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -489,6 +514,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1501,6 +1536,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1541,6 +1581,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1575,6 +1635,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2587,6 +2657,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2627,6 +2702,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2661,6 +2756,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3599,7 +3704,7 @@
 </MiscControls>
               <Define>CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1, FSL_RTOS_FREE_RTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\user\app;..\..\rtos\amazon-freertos\lib\include;..\..\rtos\amazon-freertos\lib\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\middleware\emwin\emWin_header;..\..\middleware\emwin\emWin_Config;..\..\rtos\amazon-freertos\lib\include\private;..\..\middleware\lwip\port;..\..\middleware\lwip\src;..\..\middleware\lwip\src\include;..\..\middleware\lwip\contrib\apps;..\..\user\Tshell</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\user\app;..\..\rtos\amazon-freertos\lib\include;..\..\rtos\amazon-freertos\lib\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\middleware\emwin\emWin_header;..\..\middleware\emwin\emWin_Config;..\..\rtos\amazon-freertos\lib\include\private;..\..\middleware\lwip\port;..\..\middleware\lwip\src;..\..\middleware\lwip\src\include;..\..\middleware\lwip\contrib\apps;..\..\user\Tshell;..\..\user\bsp\camera</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -3674,6 +3779,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3714,6 +3824,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3748,6 +3878,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4761,6 +4901,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4801,6 +4946,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4835,6 +5000,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5848,6 +6023,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5888,6 +6068,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5922,6 +6122,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6935,6 +7145,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\app\1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6975,6 +7190,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\bsp_lpuart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\bsp_ov7670.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi_camera_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_csi_camera_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_sccb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_ov7670.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\camera\fsl_ov7670.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -7009,6 +7244,16 @@
               <FileName>fsl_enet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_enet.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_csi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_csi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_lpi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
           </Files>
         </Group>

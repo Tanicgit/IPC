@@ -77,6 +77,8 @@ Purpose     : Configures emWins abilities, fonts etc.
 #define GUI_SUPPORT_MEMDEV   1    // Use Memory Devices
 #define GUI_SUPPORT_DEVICES  1    // Enable use of device pointers
 
+
+#define GUI_USE_ARGB	0
 #endif  // Avoid multiple inclusion
 
 /*************************** End of file ****************************/

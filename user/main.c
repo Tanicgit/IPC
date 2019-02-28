@@ -27,6 +27,7 @@
 
 #include "bsp.h"  
 #include "app_dhcp.h"
+#include "myheap4.h"
 /*******************************************************************
  * Prototypes
  *******************************************************************/
@@ -69,7 +70,14 @@ int main(void)
     Ac_log("SYSPLLPFD3:      %d Hz\r\n", CLOCK_GetFreq(kCLOCK_SysPllPfd3Clk));  
     /* 在这里添加你的代码^_^. */
   
-    LED_GPIO_Config(); 
+	
+//		uint8_t *p = staticMalloc(100);
+//		for(int i=0;i<100;i++)
+//		{
+//			p[i]=i;
+//		}
+		
+ //   LED_GPIO_Config(); //CSI占用
 		bsp_enet_config();
 		freeRtosInit();
     vTaskStartScheduler();

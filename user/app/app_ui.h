@@ -2,6 +2,6 @@
 #define __APP_UI_H
 #include "fsl_common.h"
 
-
+void UI_app(void);
 
 #endif

@@ -108,15 +108,16 @@ task.h is included from an application file. */
     ((unsigned int)((var) + ((alignbytes)-1)) & (unsigned int)(~(unsigned int)((alignbytes)-1)))
 /*16m*/
 /*0x80000000~0x80ffffff ÓÃ×÷¾²Ì¬·ÖÅä*/
-static uint32_t static_addr=0;
-#define STATIC_ALIGN	4//
 
-#define STATIC_SDRAM_ADDR		(0X80000000)
-#define STATIC_SDRAM_SPACE	(0X1000000)//16M
+static uint32_t static_addr=0;
+#define STATIC_SDRAM_ADDR		(0X80400000)
+#define STATIC_SDRAM_SPACE	(0XC00000)//12M
+__align(4) uint8_t staticsdram[STATIC_SDRAM_SPACE] __attribute__((at(STATIC_SDRAM_ADDR)));
 void *staticMalloc(uint32_t size)
 {
 	void *p=NULL;
-	size = __MYHEAP_ALIGN(size,STATIC_ALIGN);
+	size = __MYHEAP_ALIGN(size,4);
+	if(size+static_addr>STATIC_SDRAM_SPACE)return NULL;
 	p = (void*)(STATIC_SDRAM_ADDR + static_addr);
 	static_addr += size;
 	return p;

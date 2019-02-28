@@ -180,6 +180,7 @@ static void vTaskCodeVNC(void * argument) {
     // Close the connection
     //
     closesocket(Sock);
+		Ac_log("%s close\r\n",p);
     memset(&_Addr, 0, sizeof(struct sockaddr_in));
   }
 }

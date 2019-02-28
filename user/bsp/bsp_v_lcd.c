@@ -2,6 +2,9 @@
 #include "bsp_base.h"
 
 #include "myheap4.h"
+
+#define SWAP16(a)		((uint16_t)a>>8|(uint16_t)a<<8)
+
 static uint16_t *LCD_RAM;
 void V_lcd_init()
 {
@@ -15,6 +18,13 @@ void V_lcd_init()
 void drawpoint(int x,int y,uint16_t c)
 {
 	*(LCD_RAM+y*V_LCD_W+x) = c;
+}
+
+void drawHlineData(int x,int y,int size, uint16_t *c)
+{
+  for (;size > 0; size--, x++, c++) {
+		*(LCD_RAM+y*V_LCD_W+x) = (*c);
+  }	
 }
 
 uint16_t readpoint(int x,int y)

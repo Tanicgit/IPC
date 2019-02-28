@@ -497,9 +497,10 @@ static void  _DrawBitLine8BPP(GUI_DEVICE * pDevice, int x, int y, U8 const GUI_U
 *   Only required for 16bpp color depth of target. Should be removed otherwise.
 */
 static void _DrawBitLine16BPP(GUI_DEVICE * pDevice, int x, int y, U16 const GUI_UNI_PTR * p, int xsize) {
-  for (;xsize > 0; xsize--, x++, p++) {
-    _SetPixelIndex(pDevice, x, y, *p);
-  }
+//  for (;xsize > 0; xsize--, x++, p++) {
+//    _SetPixelIndex(pDevice, x, y, *p);	
+//  }
+	drawHlineData(x,y,xsize,(uint16_t*)p);
 }
 
 /*********************************************************************

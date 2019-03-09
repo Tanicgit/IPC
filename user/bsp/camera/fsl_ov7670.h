@@ -12,10 +12,10 @@
 #define USE_HARD_I2C	1
 
 #if USE_HARD_I2C
-#define OV7670_SCCB_ADDR 0x42U
-#define OV7670_WriteReg(reg, val) SCCB_WriteReg(LPI2C1, 0x42, kSCCB_RegAddr8Bit, (reg), (val))
+#define OV7670_SCCB_ADDR 0x21U
+#define OV7670_WriteReg(i2c,reg, val) SCCB_WriteReg(i2c, OV7670_SCCB_ADDR, kSCCB_RegAddr8Bit, (reg), (val))
 
-#define OV7670_ReadReg(reg, val) SCCB_ReadReg(LPI2C1, 0x43, kSCCB_RegAddr8Bit, (reg), (val))
+#define OV7670_ReadReg(i2c,reg, val) SCCB_ReadReg(i2c, OV7670_SCCB_ADDR, kSCCB_RegAddr8Bit, (reg), (val))
 #else
 status_t OV7670_WriteReg(uint8_t _ucRegAddr, uint8_t _ucRegValue);
 status_t OV7670_ReadReg(uint8_t _ucRegAddr,uint8_t *value);

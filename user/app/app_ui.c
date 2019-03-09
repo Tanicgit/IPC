@@ -63,18 +63,19 @@ void UI_app()
 //	GUI_DrawBitmap(&bm0,0,0);
 	
 	bsp_InitCamera();
-	memcpy((U8*)bm0.pData,(uint32_t*)activeFrameAddr,320*240*2);
-	GUI_DrawBitmap(&bm0,0,0);
+//	memcpy((U8*)bm0.pData,(uint32_t*)activeFrameAddr,320*240*2);
+//	GUI_DrawBitmap(&bm0,0,0);
   for(;;)
   {
 			
 		CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, activeFrameAddr);	
+		activeFrameAddr = inactiveFrameAddr;
 		/* Wait to get the full frame buffer to show. */
-		while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &activeFrameAddr))
+		while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &inactiveFrameAddr))
 		{
-			GUI_Delay(200);
 		}	
-		memcpy((U8*)bm0.pData,(uint32_t*)activeFrameAddr,320*240*2);
-		GUI_DrawBitmap(&bm0,0,0);
+//		memcpy((U8*)bm0.pData,(uint32_t*)inactiveFrameAddr,320*240*2);
+//		GUI_DrawBitmap(&bm0,0,0);
+//		GUI_Delay(200);
   }
 }

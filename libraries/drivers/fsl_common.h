@@ -311,6 +311,9 @@ _Pragma("diag_suppress=Pm120")
 #define AT_NONCACHEABLE_SECTION_INIT(var) __attribute__((section("NonCacheable.init"))) var
 #define AT_NONCACHEABLE_SECTION_ALIGN_INIT(var, alignbytes) \
     __attribute__((section("NonCacheable.init"))) __align(alignbytes) var
+		
+#define AT_SDRAM1_SECTION_ALIGN(var, alignbytes) \
+    __attribute__((section("usersdram1"), zero_init)) __align(alignbytes) var
 #else
 #define AT_NONCACHEABLE_SECTION(var) var
 #define AT_NONCACHEABLE_SECTION_ALIGN(var, alignbytes) __align(alignbytes) var

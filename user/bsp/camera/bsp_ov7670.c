@@ -12,7 +12,6 @@ void BOARD_InitCameraResource(void);
 uint32_t activeFrameAddr;
 uint32_t inactiveFrameAddr;
 
-#define OV_REG_NUM  	116  //OV7670
 
 static csi_private_data_t csiPrivateData;
 
@@ -75,22 +74,8 @@ static ov7670_resource_t ov7670Resource = {
 camera_device_handle_t cameraDevice = {
     .resource = &ov7670Resource, .ops = &ov7670_ops,
 };
-/*
-*********************************************************************************************************
-*	函 数 名: OV_ReadID
-*	功能说明: 读0V7670的芯片ID
-*	形    参: 无
-*	返 回 值: 芯片ID. 正常应该返回 0x7673
-*********************************************************************************************************
-*/
-uint16_t OV_ReadID(void)
-{
-	uint8_t idh,idl;
-
-	OV7670_ReadReg(0x0A,&idh);
-	OV7670_ReadReg(0x0B,&idl);
-	return (idh << 8) + idl;
-}
+AT_SDRAM1_SECTION_ALIGN(static uint16_t s_frameBuffer[APP_FRAME_BUFFER_COUNT][APP_CAMERA_WIDTH][APP_CAMERA_HEIGHT],
+                              FRAME_BUFFER_ALIGN);
 /*
 *********************************************************************************************************
 *	函 数 名: bsp_InitCamera
@@ -103,7 +88,7 @@ AT_NONCACHEABLE_SECTION_ALIGN(static uint16_t s_frameBuffer[APP_FRAME_BUFFER_COU
 */
 void bsp_InitCamera(void)
 {
-	uint16_t *s_frameBuffer;
+//	uint16_t *s_frameBuffer;
 	/* 初始化摄像头引脚 */
 	BOARD_InitCSIPins();
 	/* 初始化摄像头的I2C及控制引脚 */
@@ -118,7 +103,7 @@ void bsp_InitCamera(void)
         .controlFlags = APP_CAMERA_CONTROL_FLAGS,
         .framePerSec = 30,
     };
-		s_frameBuffer = staticMalloc(FRAME_BUF_SIZE);
+//		s_frameBuffer = staticMalloc(FRAME_BUF_SIZE);
     memset(s_frameBuffer, 0, FRAME_BUF_SIZE);
 
     CAMERA_RECEIVER_Init(&cameraReceiver, &cameraConfig, NULL, NULL);
@@ -240,7 +225,7 @@ void BOARD_InitCameraResource(void)
 
     LPI2C_MasterGetDefaultConfig(&masterConfig);
 		/*设置I2C时钟为400KHz*/
-    masterConfig.baudRate_Hz = 400000;
+    masterConfig.baudRate_Hz = 10000;
     masterConfig.debugEnable = true;
     masterConfig.ignoreAck = true;
 
@@ -272,7 +257,7 @@ void BOARD_InitCameraResource(void)
 		GPIO_PinInit(GPIO1, 1, &pinConfig);
 }
 #else
-
+ 
 void BOARD_InitCameraResource(void)
 {
 		//SCL
@@ -283,22 +268,18 @@ void BOARD_InitCameraResource(void)
 		IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_01_GPIO1_IO17, 0xD8B0u); //
 
   /* 定义gpio初始化配置结构体 */
-  gpio_pin_config_t led_config;      
+  gpio_pin_config_t pinConfig;      
     
    /** 核心板的LED灯，GPIO配置 **/       
-  led_config.direction = kGPIO_DigitalOutput; //输出模式
-  led_config.outputLogic =  1;                //默认高电平
-  led_config.interruptMode = kGPIO_NoIntmode; //不使用中断
-	GPIO_PinInit(GPIO1, 16, &led_config);
-	GPIO_PinInit(GPIO1, 17, &led_config);
+  pinConfig.direction = kGPIO_DigitalOutput; //输出模式
+  pinConfig.outputLogic =  1;                //默认高电平
+  pinConfig.interruptMode = kGPIO_NoIntmode; //不使用中断
+	GPIO_PinInit(GPIO1, 16, &pinConfig);
+	GPIO_PinInit(GPIO1, 17, &pinConfig);
 	
-    /* 初始化摄像头的PDN和RST引脚 */
-    gpio_pin_config_t pinConfig = {
-        kGPIO_DigitalOutput, 1,
-    };
-
-    GPIO_PinInit(GPIO1, 0, &pinConfig);
-		GPIO_PinInit(GPIO1, 1, &pinConfig);
+	GPIO_PinInit(GPIO1, 0, &pinConfig);
+	GPIO_PinInit(GPIO1, 1, &pinConfig);
+		
 }
 #endif
 

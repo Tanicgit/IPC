@@ -119,7 +119,7 @@ status_t PHY_Init(ENET_Type *base, uint32_t phyAddr, uint32_t srcClock_Hz)
                     {
                         if (((bssReg & PHY_BSTATUS_AUTONEGCOMP_MASK) != 0) && (bssReg!=0xffff))
                         {
-                            Ac_log("%04d auto negotiation complete success %04X\r\n",counter,bssReg);
+                            Ac_log("auto negotiation complete success %04X\r\n",bssReg);
                             break;
                         }
                         else
@@ -127,7 +127,7 @@ status_t PHY_Init(ENET_Type *base, uint32_t phyAddr, uint32_t srcClock_Hz)
                          /* Wait a moment for Phy status stable. */
 													//osDelay(500);	
 													bsp_delay_ms(500);
-													Ac_log("[PHY0] %04d wait autonegotiation complete...%04X\r\n",counter,bssReg);	
+													Ac_log("[PHY0] wait autonegotiation complete...%04X\r\n",bssReg);	
                         }
                     }  																				
                     if (!counter)

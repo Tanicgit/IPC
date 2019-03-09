@@ -42,17 +42,17 @@ BaseType_t xReturnedUi;
 TaskHandle_t xHandleUi = NULL;
 void vTaskCodeUi(void * pvParameters)
 {
-	while(Sys.dhcpSta==0)
-	{
-		osDelay(200);
-	}
+//	while(Sys.dhcpSta==0)
+//	{
+//		osDelay(200);
+//	}
 	GUI_Init();
 	
-	GUI_VNC_X_StartServer(0,0);
-	GUI_VNC_SetPassword((uint8_t*)"123456");
-	GUI_VNC_SetProgName("tanic");
-	GUI_VNC_SetSize(V_LCD_W,V_LCD_H);
-	GUI_VNC_RingBell();
+//	GUI_VNC_X_StartServer(0,0);
+//	GUI_VNC_SetPassword((uint8_t*)"123456");
+//	GUI_VNC_SetProgName("tanic");
+//	GUI_VNC_SetSize(V_LCD_W,V_LCD_H);
+//	GUI_VNC_RingBell();
 	
 	UI_app();
   for(;;)

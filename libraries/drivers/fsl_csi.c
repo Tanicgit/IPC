@@ -566,7 +566,9 @@ status_t CSI_TransferSubmitEmptyBuffer(CSI_Type *base, csi_handle_t *handle, uin
             CSI_Start(base);
         }
     }
-
+//		#include "t_debug.h"
+//		Ac_log("queueUserReadIdx=%d\r\n",handle->queueUserReadIdx);
+//		Ac_log("queueDrvWriteIdx=%d\r\n",handle->queueDrvWriteIdx);
     return kStatus_Success;
 }
 

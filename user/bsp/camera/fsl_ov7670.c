@@ -2,13 +2,16 @@
 #include "bsp.h"
 static void OV7670_DelayMs(uint32_t ms)
 {
-	while (ms--)
-	{
-		for (volatile int i = 0U; i < 10000000U; i++)
-		{
-			__ASM("nop");
-		}
-	}
+    volatile uint32_t i;
+    uint32_t loopPerMs = SystemCoreClock / 3000;
+
+    while (ms--)
+    {
+        i = loopPerMs;
+        while (i--)
+        {
+        }
+    }
 }
 
 
@@ -191,13 +194,13 @@ static const ov7670_reg_t  ov7670InitRegs[] =
 	{0x57, 0x80},//0x40,
 };
 
-static status_t OV7670_WriteRegs(const ov7670_reg_t regs[], uint32_t num)
+static status_t OV7670_WriteRegs(sccb_i2c_t i2c,const ov7670_reg_t regs[], uint32_t num)
 {
     status_t status = kStatus_Success;
 
     for (uint32_t i = 0; i < num; i++)
     {	
-        status = OV7670_WriteReg(regs[i].reg, regs[i].val);
+        status = OV7670_WriteReg(i2c,regs[i].reg, regs[i].val);
 
         if (kStatus_Success != status)
         {
@@ -213,7 +216,7 @@ status_t OV7670_Init(camera_device_handle_t *handle, const camera_config_t *conf
     uint8_t pid=0, ver=0;
     uint16_t width=0, height=0;
     ov7670_resource_t *resource = (ov7670_resource_t *)(handle->resource);
-//    sccb_i2c_t i2c = resource->sccbI2C;
+    sccb_i2c_t i2c = resource->sccbI2C;
 
     if ((kCAMERA_InterfaceNonGatedClock != config->interface) && (kCAMERA_InterfaceGatedClock != config->interface) &&
         (kCAMERA_InterfaceCCIR656 != config->interface))
@@ -243,47 +246,40 @@ status_t OV7670_Init(camera_device_handle_t *handle, const camera_config_t *conf
 
     /* 延时 */
     OV7670_DelayMs(2);
-
     /* 识别设备 */
-		kStatus_Fail:
-    status = OV7670_ReadReg(0x0a, &pid);
+    status = OV7670_ReadReg(i2c,0x0a, &pid);
     if (kStatus_Success != status)
     {
         return status;
     }
 
-    status = OV7670_ReadReg(0x0b, &ver);
+    status = OV7670_ReadReg(i2c,0x0b, &ver);
     if (kStatus_Success != status)
     {
         return status;
     }
 
-    if (7673 != (((uint32_t)pid << 8U) | (uint32_t)ver))
-    {
-				osDelay(1000);
-				Ac_log("OV7670ID=%d\r\n",((uint32_t)pid << 8U) | (uint32_t)ver);
-        goto kStatus_Fail;
+    if (0x7673 != (((uint32_t)pid << 8U) | (uint32_t)ver))
+    {			
+			
     }
-
+			Ac_log("OV7670ID=%04X\r\n",((uint32_t)pid << 8U) | (uint32_t)ver);
     /* 设备识别确定, 执行软件复位 */
-    status = OV7670_WriteReg(0x12, 0x80); 	/* Reset SCCB */
+    status = OV7670_WriteReg(i2c,0x12, 0x80); 	/* Reset SCCB */
 		if (kStatus_Success != status)
     {
         return status;
     }
+		
     /* 延时 */
     OV7670_DelayMs(2);
 
     /* 配置摄像头寄存器 */
-    status = OV7670_WriteRegs(ov7670InitRegs, sizeof(ov7670InitRegs)/sizeof(ov7670InitRegs[0]));
+    status = OV7670_WriteRegs(i2c,ov7670InitRegs, sizeof(ov7670InitRegs)/sizeof(ov7670InitRegs[0]));
     if (kStatus_Success != status)
     {
         return status;
     }
-//		/* 配置摄像头寄存器 */
-//		OV5640_USER_Config();
-//		/* 初始化摄像头自动对焦 */
-//		OV5640_FOCUS_AD5820_Init();	
 		return kStatus_Success;
 }
 
@@ -318,9 +314,14 @@ status_t OV7670_InitExt(camera_device_handle_t *handle, const camera_config_t *c
 #define I2C_SDA_1()  (I2C_SDA_GPIO->DR|=(1u<<I2C_SDA_PIN))				/* SDA = 1 */
 #define I2C_SDA_0()  (I2C_SDA_GPIO->DR&=~(1u<<I2C_SDA_PIN))				/* SDA = 0 */
 
-#define I2C_SDA_READ()  ((I2C_SDA_GPIO->PSR&(1u<<I2C_SDA_PIN))!=0)	/* 读SDA口线状态 */
-#define I2C_SCL_READ()  ((I2C_SCL_GPIO->PSR&(1u<<I2C_SCL_PIN))!=0)	/* 读SCL口线状态 */
+#define I2C_SDA_IN()	(I2C_SDA_GPIO->GDIR &=~(1u<<I2C_SDA_PIN))
+#define I2C_SDA_OUT()	(I2C_SDA_GPIO->GDIR |=(1u<<I2C_SDA_PIN))
 
+//#define I2C_SDA_READ()  ((I2C_SDA_GPIO->PSR&(1u<<I2C_SDA_PIN))!=0)	/* 读SDA口线状态 */
+//#define I2C_SCL_READ()  ((I2C_SCL_GPIO->PSR&(1u<<I2C_SCL_PIN))!=0)	/* 读SCL口线状态 */
+
+#define I2C_SDA_READ()  ((I2C_SDA_GPIO->DR&(1u<<I2C_SDA_PIN))!=0)	/* 读SDA口线状态 */
+#define I2C_SCL_READ()  ((I2C_SCL_GPIO->DR&(1u<<I2C_SCL_PIN))!=0)	/* 读SCL口线状态 */
 #define I2C_WR	0		/* 写控制bit */
 #define I2C_RD	1		/* 读控制bit */
 #define OV7670_SLAVE_ADDRESS	0x42
@@ -360,6 +361,7 @@ static void i2c_Delay(void)
 void i2c_Start(void)
 {
 	/* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */
+	I2C_SDA_OUT();
 	I2C_SDA_1();
 	I2C_SCL_1();
 	i2c_Delay();
@@ -380,6 +382,7 @@ void i2c_Start(void)
 void i2c_Stop(void)
 {
 	/* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */
+	I2C_SDA_OUT();
 	I2C_SDA_0();
 	I2C_SCL_1();
 	i2c_Delay();
@@ -399,6 +402,7 @@ void i2c_SendByte(uint8_t _ucByte)
 	uint8_t i;
 
 	/* 先发送字节的高位bit7 */
+	I2C_SDA_OUT();
 	for (i = 0; i < 8; i++)
 	{
 		if (_ucByte & 0x80)
@@ -437,6 +441,7 @@ uint8_t i2c_ReadByte(void)
 
 	/* 读到第1个bit为数据的bit7 */
 	value = 0;
+	I2C_SDA_IN();
 	for (i = 0; i < 8; i++)
 	{
 		value <<= 1;
@@ -463,10 +468,13 @@ uint8_t i2c_ReadByte(void)
 uint8_t i2c_WaitAck(void)
 {
 	uint8_t re;
-
+//	I2C_SDA_IN();
+	
 	I2C_SDA_1();	/* CPU释放SDA总线 */
 	i2c_Delay();
 	I2C_SCL_1();	/* CPU驱动SCL = 1, 此时器件会返回ACK应答 */
+	
+	I2C_SDA_IN();
 	i2c_Delay();
 	if (I2C_SDA_READ())	/* CPU读取SDA口线状态 */
 	{
@@ -491,6 +499,7 @@ uint8_t i2c_WaitAck(void)
 */
 void i2c_Ack(void)
 {
+	I2C_SDA_OUT();
 	I2C_SDA_0();	/* CPU驱动SDA = 0 */
 	i2c_Delay();
 	I2C_SCL_1();	/* CPU产生1个时钟 */
@@ -510,6 +519,7 @@ void i2c_Ack(void)
 */
 void i2c_NAck(void)
 {
+	I2C_SDA_OUT();
 	I2C_SDA_1();	/* CPU驱动SDA = 1 */
 	i2c_Delay();
 	I2C_SCL_1();	/* CPU产生1个时钟 */

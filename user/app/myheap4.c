@@ -84,7 +84,7 @@ task.h is included from an application file. */
 
 #include "myheap4.h"
 
-#define		myConfigTOTAL_HEAP_SIZE 20*1024*1024
+#define		myConfigTOTAL_HEAP_SIZE SDRAM3_SIAE
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
@@ -106,12 +106,23 @@ task.h is included from an application file. */
 //#else
 #define __MYHEAP_ALIGN(var, alignbytes) \
     ((unsigned int)((var) + ((alignbytes)-1)) & (unsigned int)(~(unsigned int)((alignbytes)-1)))
-/*16m*/
-/*0x80000000~0x80ffffff 用作静态分配*/
+			
+		
+#define	SDRAM1_ADDR	0X80000000
+		#define	SDRAM1_SIAE	0X1000000	
+#define	SDRAM2_ADDR SDRAM1_ADDR+SDRAM1_SIAE
+		#define	SDRAM2_SIAE	0X800000
+#define	SDRAM3_ADDR	SDRAM2_ADDR+SDRAM2_SIAE
+		#define	SDRAM3_SIAE	0X800000
+		
+/*32M SDRAM 0x80000000 ~ 0x82000000*/
+/*8M 0X80000000~0X807fffff	0X800000编译器静态分配*/
+/*8M 0X80800000~0x81ffffff  0X800000 staticMalloc 分配后不释放*/
+/*8M 0x81000000~0x81ffffff  0X1000000 用作动态分配*/
 
 static uint32_t static_addr=0;
-#define STATIC_SDRAM_ADDR		(0X80400000)
-#define STATIC_SDRAM_SPACE	(0XC00000)//12M
+#define STATIC_SDRAM_ADDR		(SDRAM2_ADDR)
+#define STATIC_SDRAM_SPACE	(SDRAM2_SIAE)//8M
 __align(4) uint8_t staticsdram[STATIC_SDRAM_SPACE] __attribute__((at(STATIC_SDRAM_ADDR)));
 void *staticMalloc(uint32_t size)
 {
@@ -125,7 +136,7 @@ void *staticMalloc(uint32_t size)
 
 
 /*16M*/
-	static uint8_t ucHeap[ myConfigTOTAL_HEAP_SIZE ]__attribute__((at(0x81000000)));
+	static uint8_t ucHeap[ myConfigTOTAL_HEAP_SIZE ]__attribute__((at(SDRAM1_ADDR)));
 //#endif /* configAPPLICATION_ALLOCATED_HEAP */
 
 /* Define the linked list structure.  This is used to link free blocks in order

@@ -69,12 +69,14 @@
 
 #define m_data2_start                  0x20200000
 #define m_data2_size                   0x00040000
+/*参考 myheap4.c中的SDRAM分配*/
+#define	SDRAM1_ADDR	0X80000000
+#define	SDRAM1_SIAE	0X1000000	
+#define	SDRAM2_ADDR SDRAM1_ADDR+SDRAM1_SIAE
+#define	SDRAM2_SIAE	0X800000
+#define	SDRAM3_ADDR	SDRAM2_ADDR+SDRAM2_SIAE
+#define	SDRAM3_SIAE	0X800000
 
-#define m_sdram0_start                 0X80000000
-#define m_sdram0_size                  0X00200000
-
-#define m_sdram1_start                 0X80200000
-#define m_sdram1_size                  0X00200000
 
 /* Sizes */
 #if (defined(__stack_size__))
@@ -121,12 +123,11 @@ LR_m_text m_interrupts_start m_text_start+m_text_size-m_interrupts_size {   ; lo
   }
   ARM_LIB_STACK m_data_start+m_data_size EMPTY -Stack_Size { ; Stack region growing down
   }
-  /*
-  RW_m_sdram1 m_sdram1_start m_sdram1_size { ; ncache RW data
-    * (NonCacheable.init)
-    * (NonCacheable)
+  
+  RW_m_ncache SDRAM3_ADDR SDRAM3_SIAE { ; ncache RW data
+    * (usersdram1)
   }
-  */
+  
 }
 
  

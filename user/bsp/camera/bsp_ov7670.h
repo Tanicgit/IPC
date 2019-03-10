@@ -9,7 +9,7 @@
 	/* Camera definition. */
 	#define APP_CAMERA_HEIGHT 240
 	#define APP_CAMERA_WIDTH 320
-	#define APP_CAMERA_CONTROL_FLAGS (kCAMERA_HrefActiveLow | kCAMERA_DataLatchOnRisingEdge)
+	#define APP_CAMERA_CONTROL_FLAGS (kCAMERA_HrefActiveHigh | kCAMERA_DataLatchOnRisingEdge)
 
 	/* Frame buffer data alignment. */
 	#define FRAME_BUFFER_ALIGN 64

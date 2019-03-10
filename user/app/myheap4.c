@@ -109,11 +109,11 @@ task.h is included from an application file. */
 			
 		
 #define	SDRAM1_ADDR	0X80000000
-		#define	SDRAM1_SIAE	0X1000000	
+#define	SDRAM1_SIAE	0X800000	
 #define	SDRAM2_ADDR SDRAM1_ADDR+SDRAM1_SIAE
-		#define	SDRAM2_SIAE	0X800000
+#define	SDRAM2_SIAE	0X800000
 #define	SDRAM3_ADDR	SDRAM2_ADDR+SDRAM2_SIAE
-		#define	SDRAM3_SIAE	0X800000
+#define	SDRAM3_SIAE	0X1000000
 		
 /*32M SDRAM 0x80000000 ~ 0x82000000*/
 /*8M 0X80000000~0X807fffff	0X800000±‡“Î∆˜æ≤Ã¨∑÷≈‰*/
@@ -136,7 +136,7 @@ void *staticMalloc(uint32_t size)
 
 
 /*16M*/
-	static uint8_t ucHeap[ myConfigTOTAL_HEAP_SIZE ]__attribute__((at(SDRAM1_ADDR)));
+	static uint8_t ucHeap[ myConfigTOTAL_HEAP_SIZE ]__attribute__((at(SDRAM3_ADDR)));
 //#endif /* configAPPLICATION_ALLOCATED_HEAP */
 
 /* Define the linked list structure.  This is used to link free blocks in order

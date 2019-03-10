@@ -53,6 +53,8 @@ Purpose     : Display controller configuration (single layer)
 #include "GUI.h"
 #include "GUIDRV_FlexColor.h"
 #include "bsp_v_lcd.h"
+
+#include "GUIDRV_Lin.h"
 /*********************************************************************
 *
 *       Layer configuration (to be modified)
@@ -63,6 +65,8 @@ Purpose     : Display controller configuration (single layer)
 //
 // Physical display size
 //
+
+
 #define XSIZE_PHYS  V_LCD_W // To be adapted to x-screen size
 #define YSIZE_PHYS  V_LCD_H // To be adapted to y-screen size
 
@@ -162,32 +166,15 @@ Purpose     : Display controller configuration (single layer)
 */
 void LCD_X_Config(void) {
   GUI_DEVICE * pDevice;
-//  CONFIG_FLEXCOLOR Config = {0};
-//  GUI_PORT_API PortAPI = {0};
-  //
-  // Set display driver and color conversion
-  //
+
+	V_lcd_init();	
   pDevice = GUI_DEVICE_CreateAndLink(&GUIDRV_Template_API, GUICC_565, 0, 0);
 	
 	pDevice = pDevice;
-  //
-  // Display driver configuration, required for Lin-driver
-  //
+
   LCD_SetSizeEx (0, XSIZE_PHYS , YSIZE_PHYS);
   LCD_SetVSizeEx(0, VXSIZE_PHYS, VYSIZE_PHYS);
-  //
-  // Orientation
-  //
-//  Config.Orientation = GUI_SWAP_XY | GUI_MIRROR_Y;
-//  GUIDRV_FlexColor_Config(pDevice, &Config);
-  //
-  // Set controller and operation mode
-  //
-//  PortAPI.pfWrite16_A0  = LcdWriteReg;
-//  PortAPI.pfWrite16_A1  = LcdWriteData;
-//  PortAPI.pfWriteM16_A1 = LcdWriteDataMultiple;
-//  PortAPI.pfReadM16_A1  = LcdReadDataMultiple;
-//  GUIDRV_FlexColor_SetFunc(pDevice, &PortAPI, GUIDRV_FLEXCOLOR_F66708, GUIDRV_FLEXCOLOR_M16C0B16);
+
 }
 
 /*********************************************************************
@@ -212,6 +199,7 @@ void LCD_X_Config(void) {
 *      0 - Ok
 */
 int LCD_X_DisplayDriver(unsigned LayerIndex, unsigned Cmd, void * pData) {
+	
   int r;
   (void) LayerIndex;
   (void) pData;

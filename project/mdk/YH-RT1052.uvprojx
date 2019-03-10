@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -431,11 +431,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -674,34 +669,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1137,7 +1117,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1552,11 +1532,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -1795,34 +1770,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2258,7 +2218,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -2673,11 +2633,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -2916,34 +2871,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3379,7 +3319,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -3416,8 +3356,8 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <DebugInformation>0</DebugInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\nor_txt_ram\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -3795,11 +3735,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -4038,34 +3973,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4501,7 +4421,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -4917,11 +4837,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -5160,34 +5075,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5623,7 +5523,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -6039,11 +5939,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -6282,34 +6177,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6745,7 +6625,7 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.11.0.0</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.10.0.4</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -7161,11 +7041,6 @@
               <FilePath>..\..\user\bsp\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_v_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\bsp_v_lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>fsl_phy.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\fsl_phy.c</FilePath>
@@ -7404,34 +7279,19 @@
           <GroupName>emwin</GroupName>
           <Files>
             <File>
-              <FileName>emWin_M4F.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>D:\RT1052\DEMO2.3.1\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_X_OS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUI_X_OS.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDRV_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\GUIDRV_Template.c</FilePath>
-            </File>
-            <File>
-              <FileName>LCDConf_FlexColor_Template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\middleware\emwin\emWin_Config\LCDConf_FlexColor_Template.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_VNC_X_StartServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\middleware\emwin\emWin_Config\GUI_VNC_X_StartServer.c</FilePath>
+            </File>
+            <File>
+              <FileName>emWin_M4F.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\middleware\emwin\emWin_library\Keil\emWin_M4F.lib</FilePath>
+            </File>
+            <File>
+              <FileName>emwin_support.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middleware\emwin\emwin_support.c</FilePath>
             </File>
           </Files>
         </Group>

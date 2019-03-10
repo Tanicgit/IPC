@@ -6,6 +6,7 @@
 
 #include "fsl_ov7670.h"
 
+
 void BOARD_InitCSIPins(void);
 void BOARD_InitCameraResource(void);
 
@@ -31,6 +32,8 @@ camera_receiver_handle_t cameraReceiver = {
 void CSI_IRQHandler(void)
 {
     CSI_DriverIRQHandler();
+	
+
 }
 /**
   * @brief  摄像头复位引脚控制函数
@@ -74,8 +77,11 @@ static ov7670_resource_t ov7670Resource = {
 camera_device_handle_t cameraDevice = {
     .resource = &ov7670Resource, .ops = &ov7670_ops,
 };
-AT_SDRAM1_SECTION_ALIGN(static uint16_t s_frameBuffer[APP_FRAME_BUFFER_COUNT][APP_CAMERA_WIDTH][APP_CAMERA_HEIGHT],
+AT_SDRAM1_SECTION_ALIGN(static uint16_t s_frameBuffer[APP_FRAME_BUFFER_COUNT][APP_CAMERA_WIDTH*APP_CAMERA_HEIGHT],
                               FRAME_BUFFER_ALIGN);
+
+
+
 /*
 *********************************************************************************************************
 *	函 数 名: bsp_InitCamera
@@ -106,7 +112,7 @@ void bsp_InitCamera(void)
 //		s_frameBuffer = staticMalloc(FRAME_BUF_SIZE);
     memset(s_frameBuffer, 0, FRAME_BUF_SIZE);
 
-    CAMERA_RECEIVER_Init(&cameraReceiver, &cameraConfig, NULL, NULL);
+    CAMERA_RECEIVER_Init(&cameraReceiver, &cameraConfig, (camera_receiver_callback_t)privateCallBack, NULL);
 
     CAMERA_DEVICE_Init(&cameraDevice, &cameraConfig);
 
@@ -125,7 +131,7 @@ void bsp_InitCamera(void)
     {
     }
 
-    /* 等待获取完整帧缓冲区以显示 */
+//    /* 等待获取完整帧缓冲区以显示 */
     while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &inactiveFrameAddr))
     {
     }
@@ -247,6 +253,31 @@ void BOARD_InitCameraResource(void)
     sourceClock = CLOCK_GetOscFreq();
 
     LPI2C_MasterInit(LPI2C1, &masterConfig, sourceClock);
+
+/* CSI MCLK select 24M. */
+    /*
+     * CSI clock source:
+     *
+     * 00 derive clock from osc_clk (24M)
+     * 01 derive clock from PLL2 PFD2
+     * 10 derive clock from pll3_120M
+     * 11 derive clock from PLL3 PFD1
+     */
+    CLOCK_SetMux(kCLOCK_CsiMux, 0);
+    /*
+     * CSI clock divider:
+     *
+     * 000 divide by 1
+     * 001 divide by 2
+     * 010 divide by 3
+     * 011 divide by 4
+     * 100 divide by 5
+     * 101 divide by 6
+     * 110 divide by 7
+     * 111 divide by 8
+     */
+    CLOCK_SetDiv(kCLOCK_CsiDiv, 0);
+
 
     /* 初始化摄像头的PDN和RST引脚 */
     gpio_pin_config_t pinConfig = {

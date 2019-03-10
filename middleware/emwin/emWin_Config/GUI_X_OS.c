@@ -55,7 +55,8 @@ Purpose     : This file provides emWin Interface with FreeRTOS
 #include "GUI.h"
 #include "FreeRTOS.h"
 #include "semphr.h"   
-#include "task.h"    
+#include "task.h"  
+#include "string.h"
 /*********************************************************************
 *
 * Global data
@@ -117,6 +118,10 @@ void GUI_X_Delay(int Period)
     vTaskDelay(Period);
 }
 
+void *emWin_memcpy(void *pDst, const void *pSrc, long size)
+{
+    return memcpy(pDst, pSrc, size);
+}
 void GUI_X_Log (const char *s) { }
 void GUI_X_Warn (const char *s) { }
 void GUI_X_ErrorOut(const char *s) { }

@@ -15,6 +15,8 @@
 
 #include "myheap4.h"
 
+
+
 GUI_BITMAP bm0 ;
 //typedef struct {
 //  U16P XSize;
@@ -51,9 +53,21 @@ extern GUI_CONST_STORAGE GUI_BITMAP bm1;
 extern uint32_t activeFrameAddr;
 extern uint32_t inactiveFrameAddr;
 extern camera_receiver_handle_t cameraReceiver;
+
+void display(uint8_t *p)
+{
+//		uint32_t i=0;
+//		Ac_log("buf=[");
+//		for(i=0;i<10;i++)
+//		Ac_log("%02x ",*p++);
+//		Ac_log("]\r\n");	
+		memcpy((U8*)bm0.pData,(uint32_t*)p,320*240*2);
+//		GUI_DrawBitmap(&bm0,0,0);	
+}
+__IO	uint32_t FPS_cnt=0;
 void UI_app()
 {
-//	uint32_t i=0;
+	
 	GUI_SetBkColor(GUI_BLUE);
 	GUI_SetColor(GUI_RED);
 	GUI_Clear();
@@ -63,8 +77,8 @@ void UI_app()
 //	GUI_DrawBitmap(&bm0,0,0);
 	
 	bsp_InitCamera();
-//	memcpy((U8*)bm0.pData,(uint32_t*)activeFrameAddr,320*240*2);
-//	GUI_DrawBitmap(&bm0,0,0);
+	
+	display((void*)activeFrameAddr);
   for(;;)
   {
 			
@@ -74,8 +88,8 @@ void UI_app()
 		while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &inactiveFrameAddr))
 		{
 		}	
-//		memcpy((U8*)bm0.pData,(uint32_t*)inactiveFrameAddr,320*240*2);
-//		GUI_DrawBitmap(&bm0,0,0);
-//		GUI_Delay(200);
+		display((void*)inactiveFrameAddr);
+		FPS_cnt++;
+	//	vTaskDelay(20);
   }
 }

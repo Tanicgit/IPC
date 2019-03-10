@@ -58,6 +58,7 @@ typedef struct _csi_resource
 /*! @brief CSI camera receiver operations structure. */
 extern const camera_receiver_operations_t csi_ops;
 
+void privateCallBack(camera_receiver_handle_t *handle, status_t status, void *userData);
 /*******************************************************************************
  * API
  ******************************************************************************/

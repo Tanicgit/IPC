@@ -470,6 +470,8 @@ status_t CSI_TransferCreateHandle(CSI_Type *base,
     s_csiIsr = CSI_TransferHandleIRQ;
 
     /* Enable interrupt. */
+	
+		NVIC_SetPriority(s_csiIRQ[instance],5);//add by tanic
     EnableIRQ(s_csiIRQ[instance]);
 
     return kStatus_Success;
@@ -527,7 +529,7 @@ status_t CSI_TransferStop(CSI_Type *base, csi_handle_t *handle)
 
     return kStatus_Success;
 }
-
+//#include "t_debug.h"
 status_t CSI_TransferSubmitEmptyBuffer(CSI_Type *base, csi_handle_t *handle, uint32_t frameBuffer)
 {
     uint32_t csicr1;
@@ -544,8 +546,11 @@ status_t CSI_TransferSubmitEmptyBuffer(CSI_Type *base, csi_handle_t *handle, uin
 
     /* Save the empty frame buffer address to queue. */
     handle->frameBufferQueue[handle->queueUserWriteIdx] = frameBuffer;
+		
+	//	Ac_log("EmptyBuffer %x  ;WriteIdx = %x\r\n",frameBuffer,handle->queueUserWriteIdx);
+		
     handle->queueUserWriteIdx = CSI_TransferIncreaseQueueIdx(handle->queueUserWriteIdx);
-
+		
     base->CSICR1 = csicr1;
 
     if (handle->transferStarted)
@@ -566,9 +571,6 @@ status_t CSI_TransferSubmitEmptyBuffer(CSI_Type *base, csi_handle_t *handle, uin
             CSI_Start(base);
         }
     }
-//		#include "t_debug.h"
-//		Ac_log("queueUserReadIdx=%d\r\n",handle->queueUserReadIdx);
-//		Ac_log("queueDrvWriteIdx=%d\r\n",handle->queueDrvWriteIdx);
     return kStatus_Success;
 }
 
@@ -588,7 +590,7 @@ status_t CSI_TransferGetFullBuffer(CSI_Type *base, csi_handle_t *handle, uint32_
     base->CSICR1 = (csicr1 & ~(CSI_CSICR1_FB2_DMA_DONE_INTEN_MASK | CSI_CSICR1_FB1_DMA_DONE_INTEN_MASK));
 
     *frameBuffer = handle->frameBufferQueue[handle->queueUserReadIdx];
-
+		
     handle->queueUserReadIdx = CSI_TransferIncreaseQueueIdx(handle->queueUserReadIdx);
 
     base->CSICR1 = csicr1;
@@ -662,7 +664,7 @@ void CSI_TransferHandleIRQ(CSI_Type *base, csi_handle_t *handle)
     }
     else
     {
-    }
+    }	
 }
 
 #if defined(CSI)

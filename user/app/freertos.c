@@ -14,15 +14,29 @@
 #include "main.h"
 #include "GUI_VNC.h"
 #include "app_ui.h"
+#include "bsp_ov7670.h"
+
+#define	EN_LWIP	1
+
+#define	EN_VNC	0
+
+#define	EN_IPC	1
+extern __IO	uint32_t FPS_cnt;
+
 BaseType_t xReturnedLed;
 TaskHandle_t xHandleLed = NULL;
 void vTaskCodeLed( void * pvParameters )
 {
 	for( ;; )
 	{  
-		vTaskDelay(1000);
+		vTaskDelay(10000);
 	//	RGB_RED_LED_TOGGLE;
+		
+		Ac_log("10*FPS = %d\r\n",FPS_cnt);
+		FPS_cnt=0;
+		#if EN_LWIP
 		Sys.dhcpSta=CheckDHCPsta();
+		#endif
 	}
 }
 BaseType_t xReturnedShell;
@@ -42,29 +56,44 @@ BaseType_t xReturnedUi;
 TaskHandle_t xHandleUi = NULL;
 void vTaskCodeUi(void * pvParameters)
 {
-//	while(Sys.dhcpSta==0)
-//	{
-//		osDelay(200);
-//	}
+//	int i=0;
+	#if EN_VNC
+	while(Sys.dhcpSta==0)
+	{
+		osDelay(200);
+	}
+	#endif
 	GUI_Init();
+	#if EN_VNC
+	GUI_VNC_X_StartServer(0,0);
+	GUI_VNC_SetPassword((uint8_t*)"123456");
+	GUI_VNC_SetProgName("tanic");
+	GUI_VNC_SetSize(V_LCD_W,V_LCD_H);
+	GUI_VNC_RingBell();
+	#endif
+	#if EN_IPC
+		UI_app();
+	#else
+		
+		GUI_SetBkColor(GUI_BLUE);
+		GUI_SetColor(GUI_WHITE);
+		GUI_Clear();
+	#endif
 	
-//	GUI_VNC_X_StartServer(0,0);
-//	GUI_VNC_SetPassword((uint8_t*)"123456");
-//	GUI_VNC_SetProgName("tanic");
-//	GUI_VNC_SetSize(V_LCD_W,V_LCD_H);
-//	GUI_VNC_RingBell();
-	
-	UI_app();
   for(;;)
   {
+	//	GUI_DispDecAt(i++,100,100,4);
+		GUI_Delay(1000);
   }
 }
 
 void freeRtosInit()
 {
+	#if EN_LWIP
 		LWIP_Init();//必须调度开始前初始化
-	  xReturnedLed = xTaskCreate(vTaskCodeLed, "vTaskCodeLed",128, ( void * ) 1,1,&xHandleLed ); 
-		xReturnedShell = xTaskCreate(vTaskCodeShell, "vTaskCodeShell",2048, ( void * ) 1,1,&xHandleShell ); 
+	#endif
+	  xReturnedLed = xTaskCreate(vTaskCodeLed, "vTaskCodeLed",128, ( void * ) 1,3,&xHandleLed ); 
+		xReturnedShell = xTaskCreate(vTaskCodeShell, "vTaskCodeShell",2048, ( void * ) 1,9,&xHandleShell ); 
 		xReturnedUi = xTaskCreate(vTaskCodeUi, "vTaskCodeUi",2048, ( void * ) 1,1,&xHandleUi );
 		
 }

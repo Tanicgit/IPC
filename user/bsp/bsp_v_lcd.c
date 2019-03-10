@@ -1,3 +1,6 @@
+/*
+8080 方式需要实现此文件
+*/
 #include "bsp_v_lcd.h"
 #include "bsp_base.h"
 

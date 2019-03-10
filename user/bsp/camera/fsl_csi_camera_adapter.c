@@ -33,6 +33,13 @@
 #include "fsl_csi.h"
 #include "fsl_csi_camera_adapter.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
+
+//add by tanic
+SemaphoreHandle_t myCountingSemOvHandle;
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -135,8 +142,10 @@ static status_t CSI_ADAPTER_Init(camera_receiver_handle_t *handle,
     CSI_Init(resource->csiBase, &csiConfig);
 
     privateData->callback = callback;
-    privateData->userData = userData;
-
+    privateData->userData = userData;	
+		
+		myCountingSemOvHandle = xSemaphoreCreateCounting( 4, 0);
+		
     return CSI_TransferCreateHandle(resource->csiBase, &(privateData->csiHandle), CSI_ADAPTER_Callback,
                                     (void *)(handle));
 }
@@ -166,10 +175,30 @@ static status_t CSI_ADAPTER_SubmitEmptyBuffer(camera_receiver_handle_t *handle, 
                                          &(((csi_private_data_t *)(handle->privateData))->csiHandle), buffer);
 }
 
+//add by tanic
+void privateCallBack(camera_receiver_handle_t *handle, status_t status, void *userData)
+{
+	BaseType_t xHigherPriorityTaskWoken;
+	xHigherPriorityTaskWoken = pdFALSE;
+	
+	if(status==kStatus_Success)
+	{
+		xSemaphoreGiveFromISR( myCountingSemOvHandle, &xHigherPriorityTaskWoken );
+	}
+	
+}
+
 static status_t CSI_ADAPTER_GetFullBuffer(camera_receiver_handle_t *handle, uint32_t *buffer)
 {
-    return CSI_TransferGetFullBuffer(((csi_resource_t *)handle->resource)->csiBase,
-                                     &(((csi_private_data_t *)(handle->privateData))->csiHandle), buffer);
+    if( xSemaphoreTake( myCountingSemOvHandle, portMAX_DELAY ) == pdTRUE )
+		{
+			 return CSI_TransferGetFullBuffer(((csi_resource_t *)handle->resource)->csiBase,
+                                &(((csi_private_data_t *)(handle->privateData))->csiHandle), buffer);
+		} 
+		else
+		{
+			return kStatus_Timeout;
+		}		
 }
 
 static void CSI_ADAPTER_Callback(CSI_Type *base, csi_handle_t *handle, status_t status, void *userData)
@@ -187,7 +216,10 @@ static void CSI_ADAPTER_Callback(CSI_Type *base, csi_handle_t *handle, status_t 
         {
             status = kStatus_Fail;
         }
-        privateData->callback(cameraReceiverHandle, status, privateData->userData);
+				if (handle->queueUserReadIdx != handle->queueDrvWriteIdx)
+				{
+					privateData->callback(cameraReceiverHandle, status, privateData->userData);
+				}
     }
 }
 

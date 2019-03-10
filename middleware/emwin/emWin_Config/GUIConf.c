@@ -88,8 +88,7 @@ void GUI_X_Config(void) {
 	U32 *aMemory = staticMalloc(GUI_NUMBYTES);
   //
   // Assign memory to emWin
-  //
-	V_lcd_init();
+  //	
 	
   GUI_ALLOC_AssignMemory(aMemory, GUI_NUMBYTES);
   //

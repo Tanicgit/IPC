@@ -243,17 +243,13 @@ socket creat 			tcp
 socket connect 		0,192.168.0.106,3200
 socket send 			0,asdfget
 socket close 			0
+socket jpeg       0
 */
-//#define SOCKET_MAX_NUM		5
-//static uint8_t socket_num=0;
-//static int sock[SOCKET_MAX_NUM];
-//struct sockaddr_in addr[SOCKET_MAX_NUM];
 static struct sockaddr_in ip_addr;
 int32_t SocketCommand(p_shell_context_t context, int32_t argc, char **argv)
 {
 	int port=-1;
 	int type=-1;
-//	int t_sock=-1;
 	int re=-1;
 	int s=-1;
 	_stringList *strlist=NULL;
@@ -387,17 +383,43 @@ int32_t SocketCommand(p_shell_context_t context, int32_t argc, char **argv)
 			context->printf_data_func("sock num err\r\n");
 		}
 	}
+	//
+	else if(0==strcmp(argv[1],"jpeg"))
+	{
+		#include "app_ui.h" 
+		uint8_t *p=0;
+		uint32_t jpeg_size=0;
+		
+		sscanf(argv[2],"%d",&s);
+		if(s>=0 && s<MEMP_NUM_NETCONN+LWIP_SOCKET_OFFSET)
+		{
+			jpeg_size=get_jpeg(&p);
+			if(jpeg_size!=NULL)
+			{
+				re = send(s,p,jpeg_size,0);
+				idle_jpeg(p);
+				context->printf_data_func("sock jpeg ok\r\n");
+			}
+			else
+			{
+				context->printf_data_func("sock jpeg NULL\r\n");
+			}
+		}
+		else
+		{
+			context->printf_data_func("sock num err\r\n");
+		}
+		
+		
+
+	}
 	else
 	{
 		context->printf_data_func("err\r\n");
 	}
 	return 0;
 }
-const shell_command_context_t xSocketCommand = {"socket", "\r\n\"socket\": [cerat,connect,send,close]\r\n",SocketCommand, 2};
-
-
-
-
+const shell_command_context_t xSocketCommand = {"socket", "\r\n\"socket\": [cerat,connect,send,close,jpeg]\r\n",SocketCommand, 2};
 
 
 

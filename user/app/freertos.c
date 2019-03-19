@@ -20,6 +20,7 @@
 
 #define	EN_VNC	0
 
+
 #define	EN_IPC	1
 extern __IO	uint32_t FPS_cnt;
 
@@ -57,14 +58,14 @@ TaskHandle_t xHandleUi = NULL;
 void vTaskCodeUi(void * pvParameters)
 {
 //	int i=0;
-	#if EN_VNC
+	#if (EN_VNC)
 	while(Sys.dhcpSta==0)
 	{
 		osDelay(200);
 	}
 	#endif
 	GUI_Init();
-	#if EN_VNC
+	#if (EN_VNC)
 	GUI_VNC_X_StartServer(0,0);
 	GUI_VNC_SetPassword((uint8_t*)"123456");
 	GUI_VNC_SetProgName("tanic");
@@ -82,7 +83,6 @@ void vTaskCodeUi(void * pvParameters)
 	
   for(;;)
   {
-	//	GUI_DispDecAt(i++,100,100,4);
 		GUI_Delay(1000);
   }
 }

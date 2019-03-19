@@ -70,12 +70,6 @@ int main(void)
     Ac_log("SYSPLLPFD3:      %d Hz\r\n", CLOCK_GetFreq(kCLOCK_SysPllPfd3Clk));  
     /* 在这里添加你的代码^_^. */
   
-	
-//		uint8_t *p = staticMalloc(100);
-//		for(int i=0;i<100;i++)
-//		{
-//			p[i]=i;
-//		}
 		
  //   LED_GPIO_Config(); //CSI占用
 		bsp_enet_config();

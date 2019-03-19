@@ -397,7 +397,6 @@ int32_t SocketCommand(p_shell_context_t context, int32_t argc, char **argv)
 			if(jpeg_size!=NULL)
 			{
 				re = send(s,p,jpeg_size,0);
-				idle_jpeg(p);
 				context->printf_data_func("sock jpeg ok\r\n");
 			}
 			else

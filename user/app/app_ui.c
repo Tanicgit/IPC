@@ -57,73 +57,83 @@ extern GUI_CONST_STORAGE GUI_BITMAP bm1;
 extern uint32_t activeFrameAddr;
 extern uint32_t inactiveFrameAddr;
 extern camera_receiver_handle_t cameraReceiver;
-unsigned long jpeg01_size=0;
-uint8_t *jpeg01=0;
-unsigned long jpeg02_size=0;
-uint8_t *jpeg02=0;
-uint8_t jpeg_idle=0;
+unsigned long jpeg_size=0;
+uint8_t *jpeg=0;
+uint8_t jpeg_sta=0;
 uint8_t *rbg888=0;
 void rgb2jpeg(uint16_t *p)
 {	
 	
-	uint32_t j=0;
-	
-	for(int i;i<X_SIZE*Y_SIZE;i++)
+	uint32_t j=0;	
+
+	if(jpeg_sta==1)
 	{
-		rbg888[j++] = (p[i]&0xf800)>>11<<3;
-		rbg888[j++] = (p[i]&0x7e0)>>5<<2;
-		rbg888[j++] = (p[i]&0x1f)<<3;
-//		rbg888[j++] = (p[i]&0x1f)<<3;
-//		rbg888[j++] = (p[i]&0x7e0)>>5<<2;
-//		rbg888[j++] = (p[i]&0xf800)<<3;
+		jpeg_size = SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN);
+//		memset(rbg888,0,jpeg_size);
+//		for(int y=0;y<240;y++)
+//		{
+//			for(int x=0;x<320;x++)
+//			{
+//				if(x>=10&&x<=60)
+//				{
+//					rbg888[j++] = 0xff;
+//					rbg888[j++] = 0x00;
+//					rbg888[j++] = 0x00;
+//				}			
+//				else if(x>=100&&x<=160)
+//				{
+//					rbg888[j++] = 0x00;
+//					rbg888[j++] = 0xff;
+//					rbg888[j++] = 0x00;
+//				}
+//				
+//				else if(x>=200&&x<=260)
+//				{
+//					rbg888[j++] = 0x00;
+//					rbg888[j++] = 0x00;
+//					rbg888[j++] = 0xff;
+//				}
+//				else
+//				{
+//					j+=3;
+//				}
+//				
+//			}
+//		}
+		
+		for(int i=0;i<X_SIZE*Y_SIZE;i++)
+		{
+			rbg888[j++] = ((p[i]&0xf800)>>11)<<3;
+			rbg888[j++] = ((p[i]&0x7e0)>>5)<<2;
+			rbg888[j++] = (p[i]&0x1f)<<3;
+	//		rbg888[j++] = (p[i]&0x1f)<<3;
+	//		rbg888[j++] = (p[i]&0x7e0)>>5<<2;
+	//		rbg888[j++] = (p[i]&0xf800)<<3;
+			
+			
+		}
+		
+		bmp2jpeg_compress(rbg888,&jpeg,&jpeg_size);
+		jpeg_sta = 0;
 	}
-	
-	if((jpeg_idle&0x01)==0)
-	{
-		jpeg01_size = SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN);
-		bmp2jpeg_compress(rbg888,&jpeg01,&jpeg01_size);
-		jpeg_idle |= 0x01;
-	}
-	else if((jpeg_idle&0x02)==0)
-	{
-		jpeg02_size = SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN);
-		bmp2jpeg_compress(rbg888,&jpeg02,&jpeg02_size);
-		jpeg_idle |= 0x02;
-	}
-	else
-	{
-	
-	}
-	
 }
 
 uint32_t get_jpeg(uint8_t **p)
 {
-	if(jpeg_idle&0x01)
+	if(jpeg_sta==0)
 	{
-		*p = jpeg01;
-		return jpeg01_size;
-	}
-	else if(jpeg_idle&0x02)
-	{
-		*p = jpeg02;
-		return jpeg02_size;
+		jpeg_sta=1;
+		while(jpeg_sta)
+		{
+			osDelay(10);
+		}
+		*p = jpeg;
+		return jpeg_size;
 	}
 	else
 	{
 		*p=NULL;
 		return 0;
-	}
-}
-void idle_jpeg(uint8_t *jpeg)
-{
-	if(jpeg01==jpeg)
-	{
-		jpeg_idle &= ~0x01;
-	}
-	else if(jpeg02==jpeg)
-	{
-		jpeg_idle &= ~0x02;
 	}
 }
 
@@ -138,8 +148,7 @@ void UI_app()
 //	creatbmp(320,240,2);
 //	memcpy((U8*)bm0.pData,bm1.pData,480*272*2);
 //	GUI_DrawBitmap(&bm0,0,0);
-	jpeg01 = staticMalloc(SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN));
-	jpeg02 = staticMalloc(SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN));
+	jpeg = staticMalloc(SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN));
 	rbg888 = staticMalloc(SDK_SIZEALIGN(X_SIZE*Y_SIZE*3,FRAME_BUFFER_ALIGN));
 	bsp_InitCamera();
 	
@@ -178,7 +187,7 @@ int bmp2jpeg_compress(unsigned char *inbuf, unsigned char **outbuf,unsigned long
 
 	toWriteCinfo.image_width = jpegWidth;
 	toWriteCinfo.image_height = jpegHeight;
-	toWriteCinfo.input_components = 3;
+	toWriteCinfo.input_components = 3;//3
 	toWriteCinfo.in_color_space = JCS_RGB;
 
 	jpeg_set_defaults(&toWriteCinfo);
@@ -187,7 +196,7 @@ int bmp2jpeg_compress(unsigned char *inbuf, unsigned char **outbuf,unsigned long
 	row_stride = jpegWidth ;
 	while(toWriteCinfo.next_scanline < toWriteCinfo.image_height)
 	{
-		row_pointer[0] = & inbuf[toWriteCinfo.next_scanline * row_stride];
+		row_pointer[0] = & inbuf[toWriteCinfo.next_scanline * row_stride * 3];//ÐÐÊ×Æ«ÒÆµØÖ·
 		(void)jpeg_write_scanlines(&toWriteCinfo, row_pointer, 1);
 	}
 	jpeg_finish_compress(&toWriteCinfo);
